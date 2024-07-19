@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WP Exam</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mt-4">
+    <a class="navbar-brand" href="#">WP Exam</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+
+    <!-- The form below should invoke the method MatchesController.showMatches -->
+    <form id="filter-form" class="form-inline mb-4">
+        <div class="form-group mr-2">
+            <label for="price" class="mr-2">Price</label>
+            <input id="price" type="text" name="price" class="form-control"/>
+        </div>
+        <div class="form-group mr-2">
+            <label for="type" class="mr-2">Type</label>
+            <select id="type" name="type" class="form-control">
+                <option value="">All</option>
+                <!-- For each type you should have one <option> like below  -->
+                <option th:each="type : ${types}" th:value="${type}" th:text="${type.toString()}"></option>
+            </select>
+        </div>
+        <button id="filter" type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
+    <div>
+        <span>Total number of matches followed:</span>
+        <th:block th:text="${totalFollows}">
+        </th:block>
+    </div>
+
+    <div class="mb-4">
+        <!-- MatchesController.showAdd -->
+        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/matches/add" class="btn btn-success">
+            Add new match
+        </a>
+    </div>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Match name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Type</th>
+            <th>Location</th>
+            <th>Follows</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- For each match you should have one <tr> like below -->
+        <tr class="item" th:each="match : ${matches}">
+            <td th:text="${match.getName()}">[match.name]</td>
+            <td th:text="${match.getDescription()}">[match.description]</td>
+            <td th:text="${match.getPrice()}">[match.price]</td>
+            <td th:text="${match.getType()}">[match.type]</td>
+            <td th:text="${match.getLocation().getName()}">[match.location]</td>
+            <td th:text="${match.getFollows()}">[match.follows]</td>
+            <td>
+                <!-- MatchesController.delete -->
+                <form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/matches/{id}/delete' (id = ${match.getId()})}" th:method="post" class="d-inline">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+                <!-- MatchesController.showEdit -->
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/matches/{id}/edit' (id = ${match.getId()})}" class="btn btn-warning btn-sm">Edit</a>
+                <!-- MatchesController.follow -->
+                <form sec:authorize="hasRole('ROLE_USER')" th:action="@{'/matches/{id}/follow' (id = ${match.getId()})}" th:method="post" class="d-inline">
+                    <button type="submit" class="btn btn-primary btn-sm">Follow match</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

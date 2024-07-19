@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>WP Exam</title>
+</head>
+<body>
+<!-- The form should submit to MatchesController.create or MatchesController.update,
+     depending on whether we are creating or editing an entity -->
+<form th:action="${match?.getId() != null ? '/matches/' + match.getId() : '/matches'}" th:method="post">
+    <div>
+        <label for="name">Name</label>
+        <input type="text"
+               id="name"
+               name="name"
+               th:value="${match?.getName()}"
+               required>
+    </div>
+    <div>
+        <label for="description">Description</label>
+        <input type="text"
+               id="description"
+               name="description"
+               th:value="${match?.getDescription()}"
+               required>
+    </div>
+    <div>
+        <label for="price">Price</label>
+        <input type="text"
+               id="price"
+               name="price"
+               th:value="${match?.getPrice()}"
+               required>
+    </div>
+    <div>
+        <label>Match Type</label><br/>
+
+        <select id="type" name="type" >
+            <div th:each="type : ${types}">
+            <!-- For each type you should have one <option> like below  -->
+            <option th:value="${type}"
+                    th:text="${type}"
+                    th:selected="${match?.getType()?.equals(type)}"
+            ></option>
+            </div>
+        </select>
+    </div>
+    <div>
+        <label>Match Location</label><br/>
+        <select id="location" name="location">
+            <div th:each="location : ${locations}">
+            <!-- For each location you should have one <option> like below  -->
+            <option th:text="${location.getName()}"
+                    th:value="${location.getId()}"
+                    th:selected="${match?.getLocation()?.getName()?.contains(location?.getName())}"
+            ></option>
+            </div>
+        </select>
+    </div>
+
+    <button id="submit" type="submit">Submit</button>
+    <a id="back" href="/matches" type="button" class="btn btn-primary">Back to matches</a>
+</form>
+
+<div>
+    <ul id="nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
