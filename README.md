@@ -24,9 +24,10 @@ The project includes a detailed and robust testing suite to ensure the system's 
 Unit testing is a fundamental approach that focuses on testing individual components or functions in isolation. This method allows us to verify that each unit of our code, such as methods, classes, or modules, functions correctly according to their specifications. By isolating these units from the rest of the application, we can ensure that they produce the expected results.
 
 2. Input Space Partitioning
+
 This technique is used to systematically test different combinations and boundary inputs. By categorizing inputs into equivalent classes and testing representative values from each class, we ensure that our software can effectively handle various scenarios, ranging from typical inputs to edge cases.
 
-3. Logic Coverage
+4. Logic Coverage
    
 Logic coverage involves examining the code coverage within the logic of our application (typically focusing on functions that return boolean values). This method helps improve the reliability and efficiency of our software by ensuring that all logical conditions and branches are tested.
 
@@ -43,17 +44,20 @@ Integration testing is crucial for verifying the interactions between different 
 Selenium is a robust tool that we use to automate web browser interactions. It allows us to verify the functionality of our web-based components by simulating user actions and interactions. Selenium ensures that our web application works smoothly across different browsers and platforms.
 
 ## Installation
-Clone the repository:
-git clone https://github.com/vladimir028/Software-Quality-Assurance-Project
+1. Clone the repository:
 
-Build the project:
-mvn clean install
+    ```sh
+    git clone https://github.com/vladimir028/Software-Quality-Assurance-Project
+    ```
 
-Run the application:
-mvn spring-boot:run
+2. Build the project:
 
-Access the application:
-http://localhost:8080
+    ```sh
+    mvn clean install
+    ```
+3. Access the application:
+
+   http://localhost:8080
 
 ## Contributing
 Contributions to improve testing or other aspects of the project are welcome. Feel free to submit pull requests or report issues.
