@@ -4,8 +4,6 @@ import mk.ukim.finki.wp.tests.model.Match;
 import mk.ukim.finki.wp.tests.model.MatchType;
 import mk.ukim.finki.wp.tests.model.exceptions.InvalidMatchIdException;
 import mk.ukim.finki.wp.tests.model.exceptions.InvalidMatchLocationIdException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

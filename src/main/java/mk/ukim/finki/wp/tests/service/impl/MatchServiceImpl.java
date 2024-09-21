@@ -8,7 +8,6 @@ import mk.ukim.finki.wp.tests.model.exceptions.InvalidMatchLocationIdException;
 import mk.ukim.finki.wp.tests.repository.MatchLocationRepository;
 import mk.ukim.finki.wp.tests.repository.MatchRepository;
 import mk.ukim.finki.wp.tests.service.MatchService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
